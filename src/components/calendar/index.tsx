@@ -1,38 +1,62 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, TextStyle, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import CalendarPicker from 'react-native-calendar-picker';
 import moment from 'moment';
 import {normalize} from '../../utils/dimension';
-
-interface CalendarProps {
-  height?: number | undefined; // height of the calendar
-  width?: number | undefined; // width of the calendar
-  selectedStartDate?: Date | undefined; // specifies a selected Start Date.
-  selectedEndDate?: Date | undefined; // specifies a selected End Date.
-  textStyle?: TextStyle | undefined; // style overall text
-  maxDate?: Date | undefined; // max Date of the calendar
-  minDate?: Date | undefined; // min Date of the calendar
-  todayBackgroundColor?: string | undefined; // color of today day
-  startFromMonday?: boolean | undefined; // days start with monday
-  allowRangeSelection?: boolean | undefined; // allow to select day range
-  selectedDayColor?: boolean | undefined; // Color for selected day
-  nextTitle?: string | undefined; //  Title of button for next month
-  previousTitle?: string | undefined; //  Title of button for previous month
-  selectedDayTextColor?: string | undefined; // Text color for selected day
-  showDayStragglers?: boolean | undefined; // previous & next month days in empty slots
-  scaleFactor?: number | undefined; // default scale to window width
-  monthTitleStyle?: string | undefined; // color of the Month Title
-  yearTitleStyle?: string | undefined; // color of the Year Title
-}
-
+import {CalendarProps} from '../../utils/types';
 const CustomCalendarPicker = (props: CalendarProps) => {
-  const {height, textStyle, previousTitle} = props;
+  const {
+    height = 400,
+    width = 300,
+    minDate,
+    maxDate,
+    dayShape,
+    nextTitle,
+    textStyle,
+    horizontal,
+    scrollable,
+    scaleFactor,
+    initialDate,
+    headingLevel,
+    endDateTitle,
+    disabledDates,
+    previousTitle,
+    nextComponent,
+    yearTitleStyle,
+    startDateTitle,
+    todayTextStyle,
+    selectYearTitle,
+    monthTitleStyle,
+    startFromMonday,
+    dayLabelsWrapper,
+    selectMonthTitle,
+    enableDateChange,
+    minRangeDuration,
+    selectedDayColor,
+    maxRangeDuration,
+    selectedDayStyle,
+    previousComponent,
+    showDayStragglers,
+    previousTitleStyle,
+    selectedRangeStyle,
+    allowRangeSelection,
+    todayBackgroundColor,
+    selectedDayTextStyle,
+    selectedDayTextColor,
+    selectedRangeEndStyle,
+    disabledDatesTextStyle,
+    selectedRangeStartStyle,
+    restrictMonthNavigation,
+    allowBackwardRangeSelect,
+    selectedRangeEndTextStyle,
+    selectedRangeStartTextStyle,
+    selectedDisabledDatesTextStyle,
+    onMonthChange,
+  } = props;
   const [selectedEndDate, setselectedEndDate] = useState<any>('');
   const [selectedStartDate, setselectedStartDate] = useState<any>('');
-  const minDate = new Date(); // Today Date
-  const maxDate = new Date(2060, 6, 3); //Max Future Date
+  const endDate = selectedEndDate ? selectedEndDate : moment(new Date());
   const startDate = selectedStartDate ? selectedStartDate : moment(new Date());
-  const endDate = selectedEndDate ? selectedEndDate : 'DD-MM-YYYY';
   const onDateChange = (date: any, type: any) => {
     if (type === 'END_DATE') {
       setselectedEndDate(date);
@@ -43,33 +67,60 @@ const CustomCalendarPicker = (props: CalendarProps) => {
   return (
     <View style={styles.container}>
       <CalendarPicker
+        width={width}
         height={height}
-        startFromMonday={true}
-        allowRangeSelection={true}
-        minDate={minDate}
         maxDate={maxDate}
-        monthTitleStyle={{color: '#000000'}}
-        yearTitleStyle={{color: '#000000'}}
-        todayBackgroundColor="#e6ffe6"
-        selectedDayColor="#7300e6"
-        nextTitle=">"
-        showDayStragglers={false}
-        selectedDayTextColor="#000000"
-        scaleFactor={375}
-        previousTitle="<"
-        textStyle={{
-          fontFamily: 'Cochin',
-          color: '#000000',
-        }}
+        minDate={minDate}
+        dayShape={dayShape}
+        nextTitle={nextTitle}
+        textStyle={textStyle}
+        horizontal={horizontal}
+        scrollable={scrollable}
+        initialDate={initialDate}
+        scaleFactor={scaleFactor}
+        headingLevel={headingLevel}
         onDateChange={onDateChange}
+        onMonthChange={onMonthChange}
+        disabledDates={disabledDates}
+        nextComponent={nextComponent}
+        previousTitle={previousTitle}
+        yearTitleStyle={yearTitleStyle}
+        todayTextStyle={todayTextStyle}
+        startFromMonday={startFromMonday}
+        monthTitleStyle={monthTitleStyle}
+        selectYearTitle={selectYearTitle}
+        minRangeDuration={minRangeDuration}
+        maxRangeDuration={maxRangeDuration}
+        selectedDayStyle={selectedDayStyle}
+        enableDateChange={enableDateChange}
+        selectMonthTitle={selectMonthTitle}
+        selectedDayColor={selectedDayColor}
+        dayLabelsWrapper={dayLabelsWrapper}
+        showDayStragglers={showDayStragglers}
+        previousComponent={previousComponent}
+        previousTitleStyle={previousTitleStyle}
+        selectedRangeStyle={selectedRangeStyle}
+        allowRangeSelection={allowRangeSelection}
+        selectedDayTextColor={selectedDayTextColor}
+        todayBackgroundColor={todayBackgroundColor}
+        selectedDayTextStyle={selectedDayTextStyle}
+        selectedRangeEndStyle={selectedRangeEndStyle}
+        disabledDatesTextStyle={disabledDatesTextStyle}
+        restrictMonthNavigation={restrictMonthNavigation}
+        selectedRangeStartStyle={selectedRangeStartStyle}
+        allowBackwardRangeSelect={allowBackwardRangeSelect}
+        selectedRangeEndTextStyle={selectedRangeEndTextStyle}
+        selectedRangeStartTextStyle={selectedRangeStartTextStyle}
+        selectedDisabledDatesTextStyle={selectedDisabledDatesTextStyle}
       />
-
       <View style={styles.selectedTextView}>
-        <Text style={textStyle}>
-          START DATE:{moment(startDate).format('DD-MM-YYYY')}
+        <Text style={styles.textStyleColor}>
+          {startDateTitle ? startDateTitle : 'START DATE: '}
+          {moment(startDate).format('DD-MM-YYYY')}
         </Text>
-        <Text style={textStyle}>
-          END DATE:{moment(endDate).format('DD-MM-YYYY')}
+        <Text style={styles.textStyleColor}>
+          {endDateTitle ? endDateTitle : 'END DATE: '}
+          {moment(endDate).format('DD-MM-YYYY')}
         </Text>
       </View>
     </View>
@@ -82,10 +133,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    marginTop: 60,
+    marginTop: '10%',
   },
   selectedTextView: {
     marginLeft: normalize(20),
     marginTop: normalize(15),
+  },
+  textStyleColor: {
+    color: 'red',
   },
 });

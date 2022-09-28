@@ -1,20 +1,35 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {View} from 'react-native';
 import React from 'react';
-import AppTest from './test';
 import CustomCalendarPicker from './src/components/calendar';
-import OrderSummary from './src/components/orderSummary';
+import {colors} from './src/utils/color';
 
 export default function App() {
+  const minDate = new Date(); // Today Date
+  const maxDate = new Date(2060, 6, 3); //Max Future Date
   return (
     <View style={{flex: 1}}>
       <CustomCalendarPicker
         height={500}
-        textStyle={{color: 'red'}}
-        previousTitle={'back'}
+        width={390}
+        minDate={minDate}
+        maxDate={maxDate}
+        nextTitle={'>'}
+        previousTitle={'<'}
+        todayBackgroundColor={colors.lightGreen}
+        selectedDayTextColor={colors.black}
+        monthTitleStyle={{color: colors.black}}
+        yearTitleStyle={{color: colors.black}}
+        startFromMonday={true}
+        allowRangeSelection={true}
+        allowBackwardRangeSelect={true}
+        selectedDayColor={colors.violet}
+        scaleFactor={375}
+        showDayStragglers={false}
+        textStyle={{
+          fontFamily: 'Cochin',
+          color: colors.black,
+        }}
       />
-      {/* <OrderSummary /> */}
     </View>
   );
 }
-
-const styles = StyleSheet.create({});
