@@ -10,8 +10,14 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@react-native-community/datetimepicker": "^6.3.2",
+    "moment": "^2.29.4",
     "react": "18.1.0",
-    "react-native": "0.70.0"
+    "react-moment": "^1.1.2",
+    "react-native": "0.70.0",
+    "react-native-calendar-picker": "^7.1.2",
+    "react-native-calendars": "^1.1289.0",
+    "react-native-step-indicator": "^1.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -20,6 +26,7 @@
     "@tsconfig/react-native": "^2.0.2",
     "@types/jest": "^26.0.23",
     "@types/react-native": "^0.69.6",
+    "@types/react-native-calendar-picker": "^7.0.2",
     "@types/react-test-renderer": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "@typescript-eslint/parser": "^5.36.2",
