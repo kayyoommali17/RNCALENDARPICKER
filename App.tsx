@@ -23,8 +23,9 @@ export default function App() {
         allowRangeSelection={true}
         allowBackwardRangeSelect={true}
         selectedDayColor={colors.violet}
+        restrictMonthNavigation={true}
         scaleFactor={375}
-        showDayStragglers={false}
+        showDayStragglers={true}
         textStyle={{
           fontFamily: 'Cochin',
           color: colors.black,

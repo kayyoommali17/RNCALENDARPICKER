@@ -4,12 +4,15 @@ import CalendarPicker from 'react-native-calendar-picker';
 import moment from 'moment';
 import {normalize} from '../../utils/dimension';
 import {CalendarProps} from '../../utils/types';
+import {colors} from '../../utils/color';
 const CustomCalendarPicker = (props: CalendarProps) => {
   const {
     height = 400,
     width = 300,
+    months,
     minDate,
     maxDate,
+    weekdays,
     dayShape,
     nextTitle,
     textStyle,
@@ -69,8 +72,10 @@ const CustomCalendarPicker = (props: CalendarProps) => {
       <CalendarPicker
         width={width}
         height={height}
+        months={months}
         maxDate={maxDate}
         minDate={minDate}
+        weekdays={weekdays}
         dayShape={dayShape}
         nextTitle={nextTitle}
         textStyle={textStyle}
@@ -113,6 +118,7 @@ const CustomCalendarPicker = (props: CalendarProps) => {
         selectedRangeStartTextStyle={selectedRangeStartTextStyle}
         selectedDisabledDatesTextStyle={selectedDisabledDatesTextStyle}
       />
+      {/* {dayLabelsWrapper? dayLabelsWrapper : ''} */}
       <View style={styles.selectedTextView}>
         <Text style={styles.textStyleColor}>
           {startDateTitle ? startDateTitle : 'START DATE: '}
@@ -140,6 +146,6 @@ const styles = StyleSheet.create({
     marginTop: normalize(15),
   },
   textStyleColor: {
-    color: 'red',
+    color: colors.black,
   },
 });

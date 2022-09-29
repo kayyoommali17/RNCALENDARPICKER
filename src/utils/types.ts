@@ -1,3 +1,4 @@
+import {Moment} from 'moment';
 import {StyleProp, TextStyle, ViewStyle} from 'react-native';
 import {
   DateChangedCallback,
@@ -12,6 +13,9 @@ export interface MaxDurationArrayItem {
   date: MomentParsable;
   maxDuration: number;
 }
+
+export type DisabledDatesFunc = (date: Moment) => boolean;
+
 export interface CalendarProps {
   height?: number | undefined; // height of the calendar
   width?: number | undefined; // width of the calendar
@@ -40,7 +44,7 @@ export interface CalendarProps {
   selectYearTitle?: string | undefined; // Title of year selector view
   headingLevel?: number | undefined; // Sets the aria-level for the calendar title heading when on Web
   dayShape?: any | undefined; // Shape of the Day component
-  restrictMonthNavigation?: boolean | undefined; // Whether to disable Previous month button if it is before minDate or Next month button if it is after MaxDate
+  restrictMonthNavigation?: boolean | undefined; // Whether to disable Previous month button if it is before minDate or Next month button if it is after MaxDate or MinDate
   enableDateChange?: boolean | undefined; // Whether to enable pressing on day
   horizontal?: boolean | undefined; // Scroll axis when scrollable set
   scrollable?: boolean | undefined; // Months are scrollable if true
@@ -49,7 +53,7 @@ export interface CalendarProps {
   minRangeDuration?: number | MinDurationArrayItem[] | undefined; // Specifies a maximum range duration when using allowRangeSelection
   maxRangeDuration?: number | MaxDurationArrayItem[] | undefined; //  Specifies a maximum range duration when using allowRangeSelection
   disabledDatesTextStyle?: TextStyle | undefined; // Text styling for disabled dates
-  disabledDates?: any | undefined; // Specifies dates that cannot be selected. Array of Dates, or a function that returns true for a given Moment date
+  disabledDates?: Date[] | DisabledDatesFunc | undefined; // Specifies dates that cannot be selected. Array of Dates, or a function that returns true for a given Moment date
   selectedDisabledDatesTextStyle?: Object | undefined; // Text style for ineligible dates during range selection
   selectedRangeStyle?: ViewStyle | undefined; // Container style for all days in range selection
   selectedRangeStartStyle?: ViewStyle | undefined; // Container style for start day of range
@@ -57,6 +61,8 @@ export interface CalendarProps {
   selectedRangeStartTextStyle?: Object | undefined; // Text style for start day of range
   selectedRangeEndTextStyle?: Object | undefined; // Text style for end day of range
   selectedDayTextStyle?: Object | undefined; // Text style for all selected day
+  weekdays?: string[] | undefined;
+  months?: string[] | undefined;
   selectedDayStyle?: ViewStyle | undefined; // Style for selected day. May override selectedDayColor
   previousComponent?: any | undefined; // Component to use in Previous button. Overrides previousTitle & previousTitleStyle
   nextComponent?: any | undefined; // Component to use in Next button. Overrides nextTitle & nextTitleStyle
@@ -64,5 +70,4 @@ export interface CalendarProps {
   onDateChange?: DateChangedCallback | undefined; // Callback when a date is selected
   startDateTitle?: string; // selected Start Date
   endDateTitle?: string; // selected End Date
-  //   onMonthChange?: DateChangedCallback | undefined;
 }
