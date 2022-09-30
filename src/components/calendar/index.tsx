@@ -118,7 +118,6 @@ const CustomCalendarPicker = (props: CalendarProps) => {
         selectedRangeStartTextStyle={selectedRangeStartTextStyle}
         selectedDisabledDatesTextStyle={selectedDisabledDatesTextStyle}
       />
-      {/* {dayLabelsWrapper? dayLabelsWrapper : ''} */}
       <View style={styles.selectedTextView}>
         <Text style={styles.textStyleColor}>
           {startDateTitle ? startDateTitle : 'START DATE: '}

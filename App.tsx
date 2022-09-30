@@ -25,7 +25,7 @@ export default function App() {
         selectedDayColor={colors.violet}
         restrictMonthNavigation={true}
         scaleFactor={375}
-        showDayStragglers={true}
+        showDayStragglers={false}
         textStyle={{
           fontFamily: 'Cochin',
           color: colors.black,
