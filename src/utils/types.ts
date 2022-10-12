@@ -70,4 +70,6 @@ export interface CalendarProps {
   onDateChange?: DateChangedCallback | undefined; // Callback when a date is selected
   startDateTitle?: string; // selected Start Date
   endDateTitle?: string; // selected End Date
+  modal?: any;
+  setModal?: any;
 }
