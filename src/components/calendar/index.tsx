@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import CalendarPicker from 'react-native-calendar-picker';
-import moment from 'moment';
 import {normalize} from '../../utils/dimension';
 import {CalendarProps} from '../../utils/types';
 import {colors} from '../../utils/color';
@@ -21,12 +20,10 @@ const CustomCalendarPicker = (props: CalendarProps) => {
     scaleFactor,
     initialDate,
     headingLevel,
-    endDateTitle,
     disabledDates,
     previousTitle,
     nextComponent,
     yearTitleStyle,
-    startDateTitle,
     todayTextStyle,
     selectYearTitle,
     monthTitleStyle,
@@ -54,21 +51,17 @@ const CustomCalendarPicker = (props: CalendarProps) => {
     selectedRangeEndTextStyle,
     selectedRangeStartTextStyle,
     selectedDisabledDatesTextStyle,
+    onDateChange,
     onMonthChange,
+    modal,
+    setModal,
   } = props;
-  const [selectedEndDate, setselectedEndDate] = useState<any>('');
-  const [selectedStartDate, setselectedStartDate] = useState<any>('');
-  const endDate = selectedEndDate ? selectedEndDate : moment(new Date());
-  const startDate = selectedStartDate ? selectedStartDate : moment(new Date());
-  const onDateChange = (date: any, type: any) => {
-    if (type === 'END_DATE') {
-      setselectedEndDate(date);
-    } else {
-      setselectedStartDate(date);
-    }
+
+  const _onPressOk = () => {
+    setModal(!modal);
   };
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {height: height, width: width}]}>
       <CalendarPicker
         width={width}
         height={height}
@@ -118,16 +111,10 @@ const CustomCalendarPicker = (props: CalendarProps) => {
         selectedRangeStartTextStyle={selectedRangeStartTextStyle}
         selectedDisabledDatesTextStyle={selectedDisabledDatesTextStyle}
       />
-      <View style={styles.selectedTextView}>
-        <Text style={styles.textStyleColor}>
-          {startDateTitle ? startDateTitle : 'START DATE: '}
-          {moment(startDate).format('DD-MM-YYYY')}
-        </Text>
-        <Text style={styles.textStyleColor}>
-          {endDateTitle ? endDateTitle : 'END DATE: '}
-          {moment(endDate).format('DD-MM-YYYY')}
-        </Text>
-      </View>
+
+      <TouchableOpacity onPress={_onPressOk}>
+        <Text style={styles.okTextStyle}>{'Ok'}</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -136,7 +123,7 @@ export default CustomCalendarPicker;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: 350,
     backgroundColor: '#FFFFFF',
     marginTop: '10%',
   },
@@ -146,5 +133,12 @@ const styles = StyleSheet.create({
   },
   textStyleColor: {
     color: colors.black,
+  },
+  okTextStyle: {
+    color: colors.black,
+    alignSelf: 'flex-end',
+    right: 15,
+    fontSize: 18,
+    fontWeight: '400',
   },
 });
