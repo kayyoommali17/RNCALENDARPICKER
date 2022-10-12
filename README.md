@@ -92,14 +92,6 @@ Order of precedence:
 - defaultBackgroundColor => selectedDayColor
 - defaultTextStyles => textStyle => selectedDayTextColor
 
-## Color Reference
-
-| Color            | Hex                                                           |
-| ---------------- | ------------------------------------------------------------- |
-| Black Color      | ![Logo](https://via.placeholder.com/10/000000?text=+) #000000 |
-| Lightgreen Color | ![Logo](https://via.placeholder.com/10/90EE90?text=+) #90EE90 |
-| Violet Color     | ![Logo](https://via.placeholder.com/10/7300e6?text=+) #7300e6 |
-
 ## More Examples
 
 Start from Monday, allowRangeSelection, Min and Max Dates and Styles Changes Example

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import CalendarPicker from 'react-native-calendar-picker';
 import {normalize} from '../../utils/dimension';
